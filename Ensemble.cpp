@@ -99,7 +99,7 @@ bool Ensemble::EstEgal ( const Ensemble & unEnsemble ) const
         }
     }
     return found;
-}
+} 
 
 //------------------------------------------------- Surcharge d'opérateurs
 
