@@ -38,7 +38,7 @@ public:
     void Afficher();
     int Min(int tab[], unsigned int nbElements, int minPrecedent, int max);
     int Max(int tab[], unsigned int nbElements);
-    bool EstEgal ( const Ensemble & unEnsemble) const;
+    bool EstEgal ( const Ensemble & unEnsemble ) const;
 
 //------------------------------------------------- Surcharge d'opérateurs
 
