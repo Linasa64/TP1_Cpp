@@ -88,21 +88,17 @@ bool Ensemble::EstEgal ( const Ensemble & unEnsemble ) const
 {
     if (cardAct != unEnsemble.cardAct)
         return false;
-    bool trouve;
-    int objet;
-    unsigned int i=0, j;
-    do{
-        trouve = false;
-        objet = t[i];
-        j=0;
-        while(objet != unEnsemble.t[j] && j<cardAct){
-            j++;
+    
+    int i, j;
+    bool found = false;
+    for(i=0; i<this->cardAct; i++){
+        for(j=0; j<this->cardAct; j++){
+            if(this->t[i]==unEnsemble.t[j]){
+                found = true;
+            }
         }
-        if(j < cardAct)
-            trouve = true;
-        i++;
-    }while(trouve && i<cardAct);
-    return trouve;
+    }
+    return found;
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
