@@ -28,11 +28,29 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+void Ensemble::tri()
+{
+	bool estTrie = false;
+	int tmp = 0;
+	while(!estTrie){
+        estTrie = true;
+		for (unsigned int i = 0 ;cardAct!=0 && i<cardAct-1 ; i++){
+			if (t[i]>t[i+1]){
+				tmp = t[i];
+				t[i] = t[i+1];
+				t[i+1] = tmp;
+				estTrie = false;
+			}
+		}
+	}
+}
+
 void Ensemble::Afficher ( void )
 {
 #ifdef MAP
     cout << "Appel à la méthode Afficher de <Ensemble>" << "\r\n";
 #endif
+    tri();
     if (t==NULL){
         cout << "0\r\n0\r\n{}\r\n";
     }else{
@@ -107,7 +125,7 @@ bool Ensemble::EstEgal ( const Ensemble & unEnsemble ) const
 
 bool Ensemble::EstInclusionStricte ( const Ensemble & unEnsemble ) const
 {
-    if(this->cardAct<unEnsemble.cardAct){
+    if(this->cardAct>=unEnsemble.cardAct){
         return false;
     }
     int i, j;
@@ -127,7 +145,6 @@ bool Ensemble::EstInclusionStricte ( const Ensemble & unEnsemble ) const
 } 
 
 
-
 crduEstInclus Ensemble::EstInclus(const Ensemble & unEnsemble) const
 {
     if(this->EstEgal(unEnsemble)){
@@ -137,6 +154,32 @@ crduEstInclus Ensemble::EstInclus(const Ensemble & unEnsemble) const
         return INCLUSION_STRICTE;
     }
     return NON_INCLUSION;
+}
+
+bool Ensemble::ValEstInclus(int val) const
+{
+    for(unsigned int i = 0; i<cardAct ; i++){
+		if(t[i]==val){
+			return true;
+		}
+	}
+	return false;
+}
+
+crduAjouter Ensemble::Ajouter (int aAjouter)
+{
+	if(ValEstInclus(aAjouter))
+	{
+		return DEJA_PRESENT;
+	}
+	else if(cardAct==cardMax)
+	{
+		return PLEIN;
+	}
+	t[cardAct]=aAjouter;
+	cardAct++;
+	tri();
+	return AJOUTE;
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -179,35 +222,23 @@ Ensemble::Ensemble (int tab [ ], unsigned int nbElements)
 #ifdef MAP
     cout << "Appel au constructeur de <Ensemble>" << "\r\n";
 #endif
-
-cardMax = nbElements;
-
-if(cardMax == 0){
-    t = NULL;
-}else{
-    t = new int[cardMax];
-    int max = Max(tab, nbElements);
-    int min = tab[0];
-    unsigned int parcours;
-    for (parcours = 1; parcours < nbElements ; parcours ++){
-        if (tab[parcours] < min)
-            min = tab[parcours];
-    }
-    t[0] = min;
-    int i = 0;
-    while(min != max){
-        i ++;
-        min = Min(tab, nbElements, min, max);
-
-        t[i] = min;
-   /*     cout << "indice : " << i<< "\r\n";
-        cout << "min : " << min << "\r\n";
-        cout << "max : " << max << "\r\n";
-        cout << "t[i] : " << t[i] << "\r\n";*/
-    }
-
-    cardAct = i+1;
-}
+    cardMax = nbElements;
+	cardAct = 0;
+	t = new int[cardMax];
+    bool exists;
+	for(unsigned int i=0; i<nbElements ; i++)
+	{
+        exists = false;
+        for(unsigned int cur=0; cur<cardAct; cur++){
+            if(t[cur]==tab[i]){
+                exists=true;
+            }
+        }
+        if(!exists){
+            t[cardAct]=tab[i];
+            cardAct+=1;
+        }
+	}
 
 } //----- Fin de Ensemble
 

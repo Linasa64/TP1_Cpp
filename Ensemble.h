@@ -18,6 +18,7 @@ const unsigned int CARD_MAX = 5;
 //------------------------------------------------------------------ Types
 
 enum crduEstInclus{NON_INCLUSION,INCLUSION_LARGE,INCLUSION_STRICTE};
+enum crduAjouter{DEJA_PRESENT,PLEIN,AJOUTE};
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Ensemble>
@@ -36,13 +37,15 @@ public:
     //
     // Contrat :
     //
-
+    void tri();
     void Afficher();
     int Min(int tab[], unsigned int nbElements, int minPrecedent, int max);
     int Max(int tab[], unsigned int nbElements);
     bool EstEgal ( const Ensemble & unEnsemble ) const;
     bool EstInclusionStricte ( const Ensemble & unEnsemble ) const;
     crduEstInclus EstInclus(const Ensemble & unEnsemble) const;
+    bool ValEstInclus(int val) const;
+    crduAjouter Ajouter (int aAjouter);
 
 //------------------------------------------------- Surcharge d'opérateurs
 
