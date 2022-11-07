@@ -8,7 +8,7 @@ int main()
     unsigned int t0 = 7;
 
     int tab1[] = {-22, 0, 4, 77};
-    unsigned int t1 = 3;
+    unsigned int t1 = 4;
 
     Ensemble e0(tab0, t0);
     Ensemble e1(tab1, t1);

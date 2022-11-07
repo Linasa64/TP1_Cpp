@@ -90,16 +90,54 @@ bool Ensemble::EstEgal ( const Ensemble & unEnsemble ) const
         return false;
     
     int i, j;
-    bool found = false;
+    bool found;
     for(i=0; i<this->cardAct; i++){
+        found = false;
         for(j=0; j<this->cardAct; j++){
             if(this->t[i]==unEnsemble.t[j]){
                 found = true;
             }
         }
+        if(!found){
+            return false;
+        }
     }
     return found;
 } 
+
+bool Ensemble::EstInclusionStricte ( const Ensemble & unEnsemble ) const
+{
+    if(this->cardAct<unEnsemble.cardAct){
+        return false;
+    }
+    int i, j;
+    bool found;
+    for(i=0; i<this->cardAct; i++){
+        found=false;
+        for(j=0; j<unEnsemble.cardAct; j++){
+            if(this->t[i]==unEnsemble.t[j]){
+                found = true;
+            }
+        }
+        if(!found){
+            return false;
+        }
+    }
+    return found;
+} 
+
+
+
+crduEstInclus Ensemble::EstInclus(const Ensemble & unEnsemble) const
+{
+    if(this->EstEgal(unEnsemble)){
+        return INCLUSION_LARGE;
+    }
+    else if(this->EstInclusionStricte(unEnsemble)){
+        return INCLUSION_STRICTE;
+    }
+    return NON_INCLUSION;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 
