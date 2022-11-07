@@ -182,6 +182,27 @@ crduAjouter Ensemble::Ajouter (int aAjouter)
 	return AJOUTE;
 }
 
+unsigned int Ensemble::Ajuster(int delta)
+{
+    //On coupe pas des valeurs si c'est <0?
+	if(cardMax+delta<=cardAct)
+	{
+		cardMax=cardAct;
+	}
+    //on coupe ou on agrandit mais on peut
+	else
+	{
+		cardMax+=delta;
+	}
+    //on copie avec les nouvelles cardinalités
+	int *copie = new int[cardMax];
+	for(unsigned int i=0 ; i<cardAct ; i++){
+		copie[i] = t[i];
+	}
+	t=copie;
+	return cardMax;
+}
+
 //------------------------------------------------- Surcharge d'opérateurs
 
 

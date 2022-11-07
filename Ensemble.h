@@ -46,6 +46,7 @@ public:
     crduEstInclus EstInclus(const Ensemble & unEnsemble) const;
     bool ValEstInclus(int val) const;
     crduAjouter Ajouter (int aAjouter);
+    unsigned int Ajuster(int delta);
 
 //------------------------------------------------- Surcharge d'opérateurs
 
