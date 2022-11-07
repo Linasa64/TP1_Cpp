@@ -47,6 +47,7 @@ public:
     bool ValEstInclus(int val) const;
     crduAjouter Ajouter (int aAjouter);
     unsigned int Ajuster(int delta);
+    bool Retirer(int element);
 
 //------------------------------------------------- Surcharge d'opérateurs
 

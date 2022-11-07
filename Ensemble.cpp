@@ -203,6 +203,31 @@ unsigned int Ensemble::Ajuster(int delta)
 	return cardMax;
 }
 
+bool Ensemble::Retirer(int element)
+{
+    int rang=-1;
+	for(unsigned int i = 0; i<cardAct ; i++)
+	{
+		if(t[i]==element)
+		{
+			rang=i;
+			break;
+		}
+	}
+	if(rang==-1)
+	{
+	    Ajuster(cardAct-cardMax);
+        return false;
+	}
+    //on met le dernier au milieu et on retrie
+    t[rang]=t[cardAct-1];
+	cardAct--;
+    tri();
+    Ajuster(cardAct-cardMax);
+    return true;
+
+}
+
 //------------------------------------------------- Surcharge d'opérateurs
 
 
